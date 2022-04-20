@@ -1,12 +1,12 @@
---2)Firmamızda iki çalışan işe başlamıştır. Çalışanların bilgileri aşağıdaki gibi olup kayıtlarının 
---yapılması gerekmektedir. 
+--2)FirmamÃ½zda iki Ã§alÃ½Ã¾an iÃ¾e baÃ¾lamÃ½Ã¾tÃ½r. Ã‡alÃ½Ã¾anlarÃ½n bilgileri aÃ¾aÃ°Ã½daki gibi olup kayÃ½tlarÃ½nÃ½n 
+--yapÃ½lmasÃ½ gerekmektedir. 
 
 Insert Into Employees(FirstName,LastName,Title,TitleOfCourtesy,BirthDate,HireDate,City,Country)
 Values('Brown','James','Sales Representative','Mr.','1970-01-01','1999-01-01','London','UK'),
 ('Dark','Annie','Sales Manager','Mrs.','1966-01-27','1999-01-01','Seattle','USA')
 
---3)Annie bir süre sonra oturduğu şehirden taşınıp New York’a yerleşti. Annie Dark 
---çalışanımızın bilgilerini güncelleyiniz. 
+--3)Annie bir sÃ¼re sonra oturduÃ°u Ã¾ehirden taÃ¾Ã½nÃ½p New Yorkâ€™a yerleÃ¾ti. Annie Dark 
+--Ã§alÃ½Ã¾anÃ½mÃ½zÃ½n bilgilerini gÃ¼ncelleyiniz. 
 
 Update Employees
 Set City=('New York')
@@ -14,9 +14,9 @@ where EmployeeID=13
 
 select * from Employees
 
---4)Çalışanlarımdan Nancy, bugün, Alfreds Futterkiste şirketine Chai ve Chang ürününden 
---beşer adet satmıştır. Bu ürünlerin Federal Shipping kargo şirketi ile üç gün sonra 
---gönderilmesi gerekmektedir. Bu siparişin kaydını oluşturunuz.
+--4)Ã‡alÃ½Ã¾anlarÃ½mdan Nancy, bugÃ¼n, Alfreds Futterkiste Ã¾irketine Chai ve Chang Ã¼rÃ¼nÃ¼nden 
+--beÃ¾er adet satmÃ½Ã¾tÃ½r. Bu Ã¼rÃ¼nlerin Federal Shipping kargo Ã¾irketi ile Ã¼Ã§ gÃ¼n sonra 
+--gÃ¶nderilmesi gerekmektedir. Bu sipariÃ¾in kaydÃ½nÃ½ oluÃ¾turunuz.
 
 Insert Into Orders(CustomerID,EmployeeID,OrderDate,RequiredDate,ShipVia)
 Values('ALFKI',1,GETDATE(),DATEADD(day, 3, GETDATE()),3)
@@ -28,9 +28,10 @@ select * from Orders
 select * from [Order Details]
 
 
---5)Speedy Express veya United Package ile taşınan, Steven Buchanan adlı çalışanın rapor verdiği 
---çalışanların ilgilendiği ve Amerika'ya gönderilen siparişlerimin ürünlerinden, tedarik süresinde
---pazarlama müdürleriyle iletişim kurulanların kategorileri nelerdir?
+--5)Speedy Express veya United Package ile taÃ¾Ã½nan, Steven Buchanan adlÃ½ Ã§alÃ½Ã¾anÃ½n rapor verdiÃ°i 
+--Ã§alÃ½Ã¾anlarÃ½n ilgilendiÃ°i ve Amerika'ya gÃ¶nderilen sipariÃ¾lerimin Ã¼rÃ¼nlerinden, tedarik sÃ¼resinde
+--pazarlama mÃ¼dÃ¼rleriyle iletiÃ¾im kurulanlarÃ½n kategorileri nelerdir?
+
 
 Select p.ProductName,c.CategoryName,s.CompanyName ShipCompany,e.FirstName+' '+e.LastName as EmployeeFullName,o.ShipCountry Country,sp.ContactTitle SupplierTittle
 From Employees e    join Orders o
@@ -50,9 +51,9 @@ and e.EmployeeID=(select ReportsTo from Employees where FirstName='Steven' and L
 and o.ShipCountry='USA'
 and sp.ContactTitle='Marketing Manager'
 
---6)Doğu bölgesinden sorumlu çalışanlar tarafından onaylanan siparişlerdeki Şirket adı “F” ile 
---başlayan kargo şirketi ile taşınan ürünleri, siparişi veren müşteri adıyla birlikte kategorilerine göre 
---sıralayarak raporlayını
+--6)DoÃ°u bÃ¶lgesinden sorumlu Ã§alÃ½Ã¾anlar tarafÃ½ndan onaylanan sipariÃ¾lerdeki Ãirket adÃ½ â€œFâ€ ile 
+--baÃ¾layan kargo Ã¾irketi ile taÃ¾Ã½nan Ã¼rÃ¼nleri, sipariÃ¾i veren mÃ¼Ã¾teri adÃ½yla birlikte kategorilerine gÃ¶re 
+--sÃ½ralayarak raporlayÃ½nÃ½
 
 Select e.EmployeeID,ProductName,c.CompanyName,CategoryName
 From Territories t join EmployeeTerritories et
@@ -76,13 +77,13 @@ and s.CompanyName like 'F%'
 order by c.CompanyName,ct.CategoryName
 
 
---7)Her bir sipariş kaleminde ürünün kategorisi, hangi kargo şirketi ile gönderildiği, müşteri bilgisi, 
---tedarikçi bilgisi ve hangi çalışan tarafından onaylandığını tek bir kolonda bir cümle ile ifade ediniz.
---(10248 id’li sipariş Dairy Products kategorisindedir. Federal Shipping isimli kargo firmasıyla Vins et alcools 
---Chevalier isimli müşteriye gönderilmiştir. Cooperativa de Quesos 'Las Cabras' ürünün tedarik edildiği 
---firmadır.)
+--7)Her bir sipariÃ¾ kaleminde Ã¼rÃ¼nÃ¼n kategorisi, hangi kargo Ã¾irketi ile gÃ¶nderildiÃ°i, mÃ¼Ã¾teri bilgisi, 
+--tedarikÃ§i bilgisi ve hangi Ã§alÃ½Ã¾an tarafÃ½ndan onaylandÃ½Ã°Ã½nÃ½ tek bir kolonda bir cÃ¼mle ile ifade ediniz.
+--(10248 idâ€™li sipariÃ¾ Dairy Products kategorisindedir. Federal Shipping isimli kargo firmasÃ½yla Vins et alcools 
+--Chevalier isimli mÃ¼Ã¾teriye gÃ¶nderilmiÃ¾tir. Cooperativa de Quesos 'Las Cabras' Ã¼rÃ¼nÃ¼n tedarik edildiÃ°i 
+--firmadÃ½r.)
 
-select Concat(o.OrderID ,' IDli sipariş ',ct.CategoryName,' Kategorisindedir.',s.CompanyName, ' isimli kargo firmasıyla ', c.CompanyName,' isimli müşteriye gönderilmiştir.', sp.CompanyName,', ',p.ProductName , ' ürünün tedarik edildiği firmadır.')
+select Concat(o.OrderID ,' IDli sipariÃ¾ ',ct.CategoryName,' Kategorisindedir.',s.CompanyName, ' isimli kargo firmasÃ½yla ', c.CompanyName,' isimli mÃ¼Ã¾teriye gÃ¶nderilmiÃ¾tir.', sp.CompanyName,', ',p.ProductName , ' Ã¼rÃ¼nÃ¼n tedarik edildiÃ°i firmadÃ½r.')
 From Orders o join Shippers s
 					on s.ShipperID=o.ShipVia
 					join [Order Details] od
@@ -96,7 +97,7 @@ From Orders o join Shippers s
 					join Suppliers sp
 					on sp.SupplierID=p.SupplierID
 
---8)Çalışanlarım kaç bölgeden sorumludur? Sorumlu olduğu bölge sayısı en çok olan çalışanım 
+--8)Ã‡alÃ½Ã¾anlarÃ½m kaÃ§ bÃ¶lgeden sorumludur? Sorumlu olduÃ°u bÃ¶lge sayÃ½sÃ½ en Ã§ok olan Ã§alÃ½Ã¾anÃ½m 
 --kimdir? (2 sorgu)
 
 select et.EmployeeID,e.FirstName+' '+e.LastName FullName,Count(TerritoryID)TerritoryCount
@@ -110,7 +111,7 @@ from EmployeeTerritories et join Employees e
 Group by et.EmployeeID,e.FirstName+' '+e.LastName
 order by TerritoryCount desc
 
---9)01-01-1996 ile 01.01.1997 tarihleri arasında en fazla(adet anlamında) hangi ürün satılmıştır
+--9)01-01-1996 ile 01.01.1997 tarihleri arasÃ½nda en fazla(adet anlamÃ½nda) hangi Ã¼rÃ¼n satÃ½lmÃ½Ã¾tÃ½r
 Select top 1 p.ProductName,sum(Quantity)TotalSales
 From Orders o join [Order Details] od
 				on o.OrderID=od.OrderID
@@ -120,8 +121,8 @@ where OrderDate between '01-01-1996' and '01-01-1997'
 Group by p.ProductName
 Order by TotalSales desc
 
---10)En çok hangi kargo şirketi ile gönderilen siparişlerde gecikme olmuştur? Şirketin adı ve 
---geciken sipariş sayısını listeleyiniz.
+--10)En Ã§ok hangi kargo Ã¾irketi ile gÃ¶nderilen sipariÃ¾lerde gecikme olmuÃ¾tur? Ãirketin adÃ½ ve 
+--geciken sipariÃ¾ sayÃ½sÃ½nÃ½ listeleyiniz.
 
 Select top 1 s.CompanyName,Count(OrderID)DelayOrderCount
 From Orders o join Shippers s
@@ -131,7 +132,7 @@ Group by s.CompanyName
 Order by DelayOrderCount desc
 
 
---11)Steven adlı personelim hangi tedarikçimin ürünlerini satıyor
+--11)Steven adlÃ½ personelim hangi tedarikÃ§imin Ã¼rÃ¼nlerini satÃ½yor
 
 select s.CompanyName
 from Suppliers s
@@ -146,7 +147,7 @@ where s.SupplierID in(select p.SupplierID
 																				where e.FirstName='Steven'))))
 
 
---12) Çalışanlarımın ad soyad bilgileri ile ilgilendikleri bölge adlarını listeleyini
+--12) Ã‡alÃ½Ã¾anlarÃ½mÃ½n ad soyad bilgileri ile ilgilendikleri bÃ¶lge adlarÃ½nÃ½ listeleyini
 
 Select et.TerritoryID,(Select t.TerritoryDescription
 					from Territories t
@@ -157,8 +158,8 @@ Select et.TerritoryID,(Select t.TerritoryDescription
 from EmployeeTerritories et
 order by TerritoryID
 
---13)Almanya’ya Federal Shipping ile kargolanmış siparişleri onaylayan çalışanları ve bu çalışanların 
---hangi bölgede olduklarını listeleyiniz.
+--13)Almanyaâ€™ya Federal Shipping ile kargolanmÃ½Ã¾ sipariÃ¾leri onaylayan Ã§alÃ½Ã¾anlarÃ½ ve bu Ã§alÃ½Ã¾anlarÃ½n 
+--hangi bÃ¶lgede olduklarÃ½nÃ½ listeleyiniz.
 
 select e.FirstName+' '+e.LastName as FullName,e.Region
 from Employees e
@@ -168,7 +169,7 @@ where e.EmployeeID in(Select o.EmployeeID
 																from Shippers s
 																Where s.CompanyName='Federal Shipping'))
 
---14)Seafood ürünlerinden sipariş gönderilen müşteriler kimlerdir
+--14)Seafood Ã¼rÃ¼nlerinden sipariÃ¾ gÃ¶nderilen mÃ¼Ã¾teriler kimlerdir
 
 Select c.CompanyName
 from Customers c
@@ -183,7 +184,8 @@ where c.CustomerID in(select o.CustomerID
 																					where c.CategoryName='Seafood')))))
 
 
---15)1996 yılında sipariş vermemiş müşteriler hangileridir?
+--15)1996 yÃ½lÃ½nda sipariÃ¾ vermemiÃ¾ mÃ¼Ã¾teriler hangileridir?
+
 
 select *
 from Customers c
@@ -193,8 +195,8 @@ where c.CustomerID not in(select o.CustomerID
 
 
 
---16)6. En çok hangi kargo şirketi ile gönderilen siparişlerde gecikme olmuştur? Şirketin adı ve geciken 
---sipariş sayısını listeleyen view’ı oluşturunuz.
+--16)6. En Ã§ok hangi kargo Ã¾irketi ile gÃ¶nderilen sipariÃ¾lerde gecikme olmuÃ¾tur? Ãirketin adÃ½ ve geciken 
+--sipariÃ¾ sayÃ½sÃ½nÃ½ listeleyen viewâ€™Ã½ oluÃ¾turunuz.
 
 Go
 Create View vw_OrderDelay as
@@ -208,8 +210,8 @@ Order by DelayOrderCount desc
 select *
 from vw_OrderDelay
 					
---17)	 Tüm personelin sattığı ürünlerin toplam satış adetinin, her bir çalışanın kendi toplam satış adetine 
---oranını çalışan adı soyadıyla birlikte listeleyen view’ı oluşturunuz.
+--17)	 TÃ¼m personelin sattÃ½Ã°Ã½ Ã¼rÃ¼nlerin toplam satÃ½Ã¾ adetinin, her bir Ã§alÃ½Ã¾anÃ½n kendi toplam satÃ½Ã¾ adetine 
+--oranÃ½nÃ½ Ã§alÃ½Ã¾an adÃ½ soyadÃ½yla birlikte listeleyen viewâ€™Ã½ oluÃ¾turunuz.
 Go
 Create view vw_SalesRate as
 Select e.FirstName+' '+e.LastName as FullName,
@@ -222,7 +224,7 @@ Group by e.EmployeeID,e.FirstName+' '+e.LastName
 
 select * from vw_SalesRate
 
---18)Çalışanları ve onların yöneticilerini listeleyen view’ı oluşturunuz
+--18)Ã‡alÃ½Ã¾anlarÃ½ ve onlarÃ½n yÃ¶neticilerini listeleyen viewâ€™Ã½ oluÃ¾turunuz
 
 Go
 Create view vw_EmployeeAndManager as
@@ -233,10 +235,11 @@ from Employees e
 
 select * from vw_EmployeeAndManager
 
---19)Batı bölgesinden sorumlu olan çalışanlarımın onayladığı siparişlerimi view olarak kaydediniz. 
---Ürünlerimin tedarikçilerini listeleyen bir view oluşturunuz. Bu viewleri kullanarak 
---batı bölgesinden sorumlu olan çalışanlarımın onayladığı siparişlerimin tedarikçi bilgilerini 
---listeleyiniz.
+--19)BatÃ½ bÃ¶lgesinden sorumlu olan Ã§alÃ½Ã¾anlarÃ½mÃ½n onayladÃ½Ã°Ã½ sipariÃ¾lerimi view olarak kaydediniz. 
+--ÃœrÃ¼nlerimin tedarikÃ§ilerini listeleyen bir view oluÃ¾turunuz. Bu viewleri kullanarak 
+--batÃ½ bÃ¶lgesinden sorumlu olan Ã§alÃ½Ã¾anlarÃ½mÃ½n onayladÃ½Ã°Ã½ sipariÃ¾lerimin tedarikÃ§i bilgilerini 
+--listeleyiniz.
+
 ----------------19.1----------------------
 Go
 Alter view vw_EmployeeWestern as
@@ -273,8 +276,8 @@ Group by Employee,OrderID,ProductName,CompanyName
 
 
 
---20)Tedarikçi id’sini parametre alan ve o tedarikçinin sağladığı 
---ürünlerin yer aldığı siparişleri listeleyen stored procedure yapısını oluşturunuz.
+--20)TedarikÃ§i idâ€™sini parametre alan ve o tedarikÃ§inin saÃ°ladÃ½Ã°Ã½ 
+--Ã¼rÃ¼nlerin yer aldÃ½Ã°Ã½ sipariÃ¾leri listeleyen stored procedure yapÃ½sÃ½nÃ½ oluÃ¾turunuz.
 Go
 Create Procedure sp_SuppliersProducts(@SuppId int) as
 select od.OrderID,p.ProductName,s.CompanyName
@@ -288,7 +291,7 @@ exec sp_SuppliersProducts 4
 exec sp_SuppliersProducts 17
 
 
---21)Girilen iki tarih arasındaki günler için günlük ciromu veren bir stored procedure oluşturunu
+--21)Girilen iki tarih arasÃ½ndaki gÃ¼nler iÃ§in gÃ¼nlÃ¼k ciromu veren bir stored procedure oluÃ¾turunu
 go
 Create Procedure sp_DailyCiro(@FirstDate date,@LastDate date) as
 select convert(date,o.OrderDate),sum(Quantity*UnitPrice*(1-Discount))Ciro
@@ -300,8 +303,8 @@ order by o.OrderDate
 
 exec sp_DailyCiro '1997-07-18','1997-07-23'
 
---22)Girilen ülke adına göre hangi tedarikçi firmadan kaç adet ürün alındığını listeleyen stored 
---procedure yapısını oluşturunuz.
+--22)Girilen Ã¼lke adÃ½na gÃ¶re hangi tedarikÃ§i firmadan kaÃ§ adet Ã¼rÃ¼n alÃ½ndÃ½Ã°Ã½nÃ½ listeleyen stored 
+--procedure yapÃ½sÃ½nÃ½ oluÃ¾turunuz.
 Go
 Alter Procedure sp_SupplierCountryProducts(@Country varchar(100)) as
 select s.CompanyName,sum(od.Quantity)TotalAmount
@@ -315,8 +318,8 @@ having s.Country=@Country
 exec sp_SupplierCountryProducts 'USA'
 exec sp_SupplierCountryProducts 'Japan'
 
---23) Müşterinin en çok sipariş ettiği 3 ürünü listeleyen stored procedure yapısını oluşturun. Parametre 
---olarak müşteri numarasını alınız
+--23) MÃ¼Ã¾terinin en Ã§ok sipariÃ¾ ettiÃ°i 3 Ã¼rÃ¼nÃ¼ listeleyen stored procedure yapÃ½sÃ½nÃ½ oluÃ¾turun. Parametre 
+--olarak mÃ¼Ã¾teri numarasÃ½nÃ½ alÃ½nÃ½z
 Go
 Create Procedure sp_CustomerTop3Order(@Customer varchar(100)) as
 Select top 3 p.ProductName,sum(Quantity)TotalOrderAmount
@@ -332,22 +335,10 @@ order by TotalOrderAmount desc
 
 exec sp_CustomerTop3Order 'Ernst Handel'
 
---24)Parametre olarak ad soyad ve doğum tarihi bilgisini alıp çalışanlara mail adresi 
---oluşturacak fonksiyonu oluşturunuz.
 
-Create Function Email(@Name varchar(40),@Surname varchar(40),@Birthday date)
-returns varchar(100)
-as
-begin
-	declare @CreatedMail varchar(100)
-	set @CreatedMail=@Name+'.'+@Surname+convert(varchar(20),@Birthday)+'@northwind.com'
-	return @CreatedMail 
-end
 
-select dbo.Email('enes','sagban','05-11-1995')
-
---25)Parametre olarak alınan müşteri numarasına göre müşterinin toplam vermiş olduğu 
---sipariş sayısını geri döndüren fonksiyonu yazınız. 
+--25)Parametre olarak alÃ½nan mÃ¼Ã¾teri numarasÃ½na gÃ¶re mÃ¼Ã¾terinin toplam vermiÃ¾ olduÃ°u 
+--sipariÃ¾ sayÃ½sÃ½nÃ½ geri dÃ¶ndÃ¼ren fonksiyonu yazÃ½nÃ½z. 
 
 Create Function OrderCounter(@CustID varchar(5))
 returns int
@@ -369,15 +360,15 @@ create function awsd(@id nchar(5))
 returns int 
 as
 begin
-declare @siparıssayısı int
-select  @siparıssayısı= count(o.OrderID) from orders o where o.CustomerID=@id group by CustomerID 
-return @siparıssayısı
+declare @siparÃ½ssayÃ½sÃ½ int
+select  @siparÃ½ssayÃ½sÃ½= count(o.OrderID) from orders o where o.CustomerID=@id group by CustomerID 
+return @siparÃ½ssayÃ½sÃ½
 end 
 select dbo.awsd('ALFKI')
 
---26)Girdi olarak sipariş numarası alıp siparişin hangi müşteriye, hangi kargo şirketiyle, hangi 
---çalışan tarafından gönderildiğini ve gönderilen ürünlerin kaçar adet olduğunu ürünlerin 
---adı ile birlikte listeleyen fonksiyonu yazınız.
+--26)Girdi olarak sipariÃ¾ numarasÃ½ alÃ½p sipariÃ¾in hangi mÃ¼Ã¾teriye, hangi kargo Ã¾irketiyle, hangi 
+--Ã§alÃ½Ã¾an tarafÃ½ndan gÃ¶nderildiÃ°ini ve gÃ¶nderilen Ã¼rÃ¼nlerin kaÃ§ar adet olduÃ°unu Ã¼rÃ¼nlerin 
+--adÃ½ ile birlikte listeleyen fonksiyonu yazÃ½nÃ½z.
 
 Create Function OrderProductQuantity(@OrderID int)
 returns table
@@ -402,7 +393,7 @@ where o.OrderID=@OrderID
 
 Select * from OrderProductQuantity(10248)
 
---27)0 ile 100 arasındaki asal sayıları print eden sql sorgusunu yazınız.
+--27)0 ile 100 arasÃ½ndaki asal sayÃ½larÃ½ print eden sql sorgusunu yazÃ½nÃ½z.
 
 Declare @AsalKontrol int=2
 Declare @Bolen int=1
